@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: tyrell-nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./api:/var/www/html
+    networks:
+      - tyrell_network
+    restart: always
+
+  php:
+    build:
+      context: .
+      dockerfile: ./php/Dockerfile
+    container_name: tyrell-api
+    volumes:
+      - ./api:/var/www/html
+    depends_on:
+      - mysql
+      - nginx
+    ports:
+      - "9000:9000"
+    networks:
+      - tyrell_network
+
+  mysql:
+    image: mysql:latest
+    container_name: tyrell-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: cakephp_db
+      MYSQL_USER: tyrell
+      MYSQL_PASSWORD: secret
+    ports:
+      - "3306:3306"
+    networks:
+      - tyrell_network
+
+volumes:
+  mysql-data:
+
+networks:
+  tyrell_network:
+    driver: bridge
