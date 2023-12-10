@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 3000
 
 # Command to run the application
-CMD ["chmod", "+x", "/app/deal-card-cli", "&&","node", "deal-card.js"]
+CMD ["chmod", "+x", "/app/deal-card-cli", "&&","node", "app.js"]

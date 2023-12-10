@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Input Form</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <h1>Enter Number of Players</h1>
+  <form id="inputForm">
+    <label for="numPlayers">Number of Players:</label>
+    <input type="number" id="numPlayers" name="numPlayers" required>
+    <button type="button" onclick="submitForm()">Submit</button>
+  </form>
+
+  <div id="resultSection" style="display: none;">
+    <h2>Dealt Cards</h2>
+    <ul id="dealtCardsList"></ul>
+  </div>
+</body>
+</html>
