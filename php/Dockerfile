@@ -31,8 +31,8 @@ RUN composer install --no-plugins --no-scripts
 
 # Adjust file permissions
 RUN chown -R www-data:www-data /var/www/html && \
-    find /var/www/html -type d -exec chmod 777 {} \; && \
-    find /var/www/html -type f -exec chmod 777 {} \; && \
+    find /var/www/html -type d -exec chmod 755 {} \; && \
+    find /var/www/html -type f -exec chmod 755 {} \; && \
     chmod -R 777 /var/www/html/logs /var/www/html/tmp && \
     chmod -R 777 /var/www/html/tmp/cache
 

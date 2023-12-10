@@ -1,23 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Input Form</title>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="app.js" defer></script>
-</head>
-<body>
-  <h1>Enter Number of Players</h1>
-  <form id="inputForm">
-    <label for="numPlayers">Number of Players:</label>
-    <input type="number" id="numPlayers" name="numPlayers" required>
-    <button type="button" onclick="submitForm()">Submit</button>
-  </form>
 
-  <div id="resultSection" style="display: none;">
-    <h2>Dealt Cards</h2>
-    <ul id="dealtCardsList"></ul>
-  </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Form</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="app.js" defer></script>
+    <link rel="stylesheet" href="/app.css">
+</head>
+
+<body class="bg-gray-100 font-sans">
+    <!-- Header -->
+    <header class="bg-blue-700 text-white text-center py-4 min-h-[200px]">
+        <h1 class="text-2xl font-bold">Card Dealing App</h1>
+    </header>
+
+    <!-- Main Content -->
+    <div class="flex justify-center min-h-screen">
+        <div class="container mx-auto mt-4 p-4 bg-white shadow-md rounded">
+            <h2 class="text-3xl font-semibold mb-4">Enter Number of Players</h2>
+
+            <!-- Form -->
+            <form id="inputForm" class="mb-4">
+                <label for="numPlayers" class="block text-sm font-medium text-gray-600 mb-2">Number of Players:</label>
+                <input type="number" id="numPlayers" name="numPlayers" required
+                    class="mb-4 p-2 border rounded-md w-full">
+                <button type="button" onclick="submitForm()"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
+                    Submit
+                </button>
+            </form>
+
+            <!-- Result Section -->
+            <div id="resultSection" style="display: none;">
+                <h2 class="text-3xl font-semibold mb-4">Dealt Cards</h2>
+
+                <div class="bg-gray-100 rounded p-4">
+                    <ul id="dealtCardsList" class="list-disc pl-4">
+                        <!-- Example card item -->
+                        <li class="flex items-center justify-between mb-2">
+                        </li>
+                        <!-- Repeat this structure for each dealt card -->
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white text-center py-4">
+        <p>&copy; 2023 Card Dealing App. All rights reserved.</p>
+    </footer>
 </body>
+
 </html>

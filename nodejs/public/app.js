@@ -20,6 +20,7 @@ async function submitForm() {
         // Populate the UI with the dealt cards
         dealt.forEach((card) => {
             const listItem = document.createElement('li');
+            listItem.classList.add('flex', 'items-center', 'justify-between', 'mb-2')
             listItem.textContent = card;
             dealtCardsList.appendChild(listItem);
         });

@@ -11,10 +11,14 @@ COPY /nodejs/package*.json ./
 RUN npm install
 
 # Copy the entire application code to the working directory
-COPY . .
+COPY /nodejs/* ./
+
+RUN chmod +x /app/deal-card-cli
+
+RUN npm run build:styles
 
 # Expose the port on which the Node.js application will run
 EXPOSE 3000
 
 # Command to run the application
-CMD ["chmod", "+x", "/app/deal-card-cli", "&&","node", "app.js"]
+CMD ["node", "app.js"]

@@ -14,9 +14,6 @@ const port = 3000;
 // Set the base URL for the external API
 const API_BASE_URL = "http://nginx";
 
-
-
-
 // Set EJS as the view engine
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
