@@ -41,8 +41,21 @@ services:
     networks:
       - tyrell_network
 
-volumes:
-  mysql-data:
+  nodejs:
+    build:
+      context: .
+      dockerfile: ./nodejs/Dockerfile
+    container_name: tyrell-nodejs
+    volumes:
+      - ./nodejs:/app
+    depends_on:
+      - php
+    networks:
+      - tyrell_network
+    environment:
+      API_BASE_URL: nginx
+    ports:
+      - 3000:3000
 
 networks:
   tyrell_network:

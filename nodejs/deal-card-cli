@@ -1,0 +1,58 @@
+#!/usr/bin/env node
+
+import axios from 'axios';
+
+// Base URL for the external API
+const API_BASE_URL = 'http://nginx';
+
+/**
+ * Fetches and logs dealt cards from the card distribution API.
+ *
+ * @param {number} numPlayers - The number of players to distribute cards to.
+ * @returns {Promise<void>} A promise that resolves after dealing cards or rejects on error.
+ */
+async function dealCards(numPlayers = null) {
+  try {
+    // Make a GET request to the card distribution API endpoint
+    const response = await axios.get(`${API_BASE_URL}/api/card-distribution/distribute/${numPlayers}`);
+
+    // Process the response and log the dealt cards
+    const dealtCards = Object.values(response.data.data).map((val) => val.join(','));
+    logDealtCards(dealtCards);
+  } catch (error) {
+    // Handle errors, including HTTP response errors and other errors
+    handleErrors(error);
+  }
+}
+
+/**
+ * Logs the dealt cards to the console.
+ *
+ * @param {string[]} dealtCards - The array of dealt cards to be logged.
+ */
+function logDealtCards(dealtCards) {
+  dealtCards.forEach((card) => {
+    console.log(card);
+  });
+}
+
+/**
+ * Handles errors, logging specific details based on error type.
+ *
+ * @param {Error} error - The error object.
+ */
+function handleErrors(error) {
+  if (error.response) {
+    // Handle HTTP response errors
+    console.error('HTTP Error:', error.response.data.message);
+  } else {
+    // Handle other errors
+    console.error('Error:', error.message);
+  }
+}
+
+// Get the number of players from the command line arguments
+const numPlayers = process.argv[2];
+
+// Call the dealCards function with the specified number of players
+dealCards(numPlayers);
