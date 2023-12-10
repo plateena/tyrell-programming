@@ -281,7 +281,7 @@ return [
         'default' => [
             'className' => Connection::class,
             'driver' => Mysql::class,
-            'host' => '192.168.112.2',
+            'host' => 'mysql',
             'username' => 'tyrell',
             'password' => 'secret',
             'database' => 'cakephp_db',

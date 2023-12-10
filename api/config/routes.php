@@ -93,4 +93,14 @@ return function (RouteBuilder $routes): void {
      * });
      * ```
      */
+
+
+$routes->prefix('api', ['_namePrefix' => 'api:'], function (RouteBuilder $routes) {
+    // $routes->setExtensions(['json']); // Enable JSON response format
+
+    $routes->connect('/card-distribution/distribute/:numPeople', ['controller' => 'CardDistributionController', 'action' => 'distribute'])
+        ->setPass(['numPeople']);
+    $routes->fallbacks(DashedRoute::class);
+});
+
 };
