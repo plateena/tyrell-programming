@@ -4,29 +4,54 @@
  */
 async function submitForm() {
     try {
-        // Fetch the number of players from the input field
-        const numPlayers = document.getElementById('numPlayers').value;
+        const numPlayersInput = document.getElementById("numPlayers");
+        const numPlayers = numPlayersInput.value;
+        const dealtCardsList = document.getElementById("dealtCardsList");
+        const resultWrap = document.getElementById("resultSection");
+        const errorMessage = document.getElementById("errorMessage");
+
+        // Clear previous results and error messages
+        dealtCardsList.innerHTML = "";
+        errorMessage.innerText = "";
+        errorMessage.style.display = "none";
+
+        // Hide the result section
+        resultWrap.style.display = "none";
 
         // Make an asynchronous GET request to the server
-        const { data: { dealt } } = await axios.get(`/dealt-cards?people=${numPlayers}`);
+        const response = await axios.get(`/dealt-cards?people=${numPlayers}`);
+        const dealt = response.data.dealt;
 
         // Display the result section
-        document.getElementById('resultSection').style.display = 'block';
-
-        // Update the dealt cards list in the UI
-        const dealtCardsList = document.getElementById('dealtCardsList');
-        dealtCardsList.innerHTML = ''; // Clear previous results
+        resultWrap.style.display = "block";
 
         // Populate the UI with the dealt cards
         dealt.forEach((card) => {
-            const listItem = document.createElement('li');
-            listItem.classList.add('flex', 'items-center', 'justify-between', 'mb-2')
+            const listItem = document.createElement("li");
+            listItem.classList.add("flex", "items-center", "justify-between", "mb-2");
             listItem.textContent = card;
             dealtCardsList.appendChild(listItem);
         });
     } catch (error) {
-        // Log errors to the console and show an alert to the user
-        console.error('An error occurred:', error);
-        alert('Irregularity occurred');
+        handleSubmissionError(error);
+    }
+}
+
+/**
+ * Handles errors that occur during form submission.
+ * @param {Error} error - The error object.
+ */
+function handleSubmissionError(error) {
+    const errorMessage = document.getElementById("errorMessage");
+
+    if (_.has(error, "response.data.error")) {
+        // Display the server-provided error message
+        errorMessage.innerText = error.response.data.error;
+        errorMessage.style.display = "block";
+    } else {
+        // Log errors to the console and show a generic alert to the user
+        console.error("An error occurred:", error);
+        errorMessage.innerText = "Irregularity occurred";
+        errorMessage.style.display = "block";
     }
 }

@@ -11,7 +11,7 @@ COPY /nodejs/package*.json ./
 RUN npm install
 
 # Copy the entire application code to the working directory
-COPY /nodejs/* ./
+COPY ./nodejs /app
 
 RUN chmod +x /app/deal-card-cli
 

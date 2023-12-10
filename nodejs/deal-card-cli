@@ -44,7 +44,7 @@ function logDealtCards(dealtCards) {
 function handleErrors(error) {
   if (error.response) {
     // Handle HTTP response errors
-    console.error('HTTP Error:', error.response.data.message);
+    console.error(error.response.data.message);
   } else {
     // Handle other errors
     console.error('Error:', error.message);

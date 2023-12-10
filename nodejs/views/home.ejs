@@ -6,13 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Input Form</title>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
     <script src="app.js" defer></script>
     <link rel="stylesheet" href="/app.css">
 </head>
 
 <body class="bg-gray-100 font-sans">
     <!-- Header -->
-    <header class="bg-blue-700 text-white text-center py-4 min-h-[200px]">
+    <header class="bg-blue-700 text-white text-center py-4 min-h-[200px] mb-4">
         <h1 class="text-2xl font-bold">Card Dealing App</h1>
     </header>
 
@@ -22,14 +23,19 @@
             <h2 class="text-3xl font-semibold mb-4">Enter Number of Players</h2>
 
             <!-- Form -->
-            <form id="inputForm" class="mb-4">
-                <label for="numPlayers" class="block text-sm font-medium text-gray-600 mb-2">Number of Players:</label>
-                <input type="number" id="numPlayers" name="numPlayers" required
-                    class="mb-4 p-2 border rounded-md w-full">
-                <button type="button" onclick="submitForm()"
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
-                    Submit
-                </button>
+            <form id="inputForm" onSubmit="submitForm(); return false;" class="mb-4">
+                <div class="mb-2">
+                    <label for="numPlayers" class="block text-sm font-medium text-gray-600 mb-2">Number of Players:</label>
+                    <input type="text" id="numPlayers" name="numPlayers" 
+                        class="mb-4 p-2 border rounded-md w-full">
+                    <span id="errorMessage" class="error"></span>
+                </div>
+                <div>
+                    <button type="button" onclick="submitForm()"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
+                        Submit
+                    </button>
+                </div>
             </form>
 
             <!-- Result Section -->
